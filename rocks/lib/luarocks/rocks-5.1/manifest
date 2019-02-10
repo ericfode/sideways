@@ -1,0 +1,154 @@
+commands = {
+   fennel = {
+      "fennel/0.2.1-2"
+   }
+}
+dependencies = {
+   bump = {
+      ["3.1.7-1"] = {
+         {
+            constraints = {
+               {
+                  op = ">=",
+                  version = {
+                     5, 1, string = "5.1"
+                  }
+               }
+            },
+            name = "lua"
+         }
+      }
+   },
+   fennel = {
+      ["0.2.1-2"] = {
+         {
+            constraints = {
+               {
+                  op = ">=",
+                  version = {
+                     5, 1, string = "5.1"
+                  }
+               }
+            },
+            name = "lua"
+         }
+      }
+   },
+   fun = {
+      ["0.1.3-1"] = {
+         {
+            constraints = {},
+            name = "lua"
+         }
+      }
+   },
+   hump = {
+      ["0.4-2"] = {
+         {
+            constraints = {
+               {
+                  op = ">=",
+                  version = {
+                     5, 1, string = "5.1"
+                  }
+               }
+            },
+            name = "lua"
+         }
+      }
+   }
+}
+modules = {
+   bump = {
+      "bump/3.1.7-1"
+   },
+   fennel = {
+      "fennel/0.2.1-2"
+   },
+   fennelview = {
+      "fennel/0.2.1-2"
+   },
+   fun = {
+      "fun/0.1.3-1"
+   },
+   ["hump.camera"] = {
+      "hump/0.4-2"
+   },
+   ["hump.class"] = {
+      "hump/0.4-2"
+   },
+   ["hump.gamestate"] = {
+      "hump/0.4-2"
+   },
+   ["hump.signal"] = {
+      "hump/0.4-2"
+   },
+   ["hump.timer"] = {
+      "hump/0.4-2"
+   },
+   ["hump.vector"] = {
+      "hump/0.4-2"
+   },
+   ["hump.vector-light"] = {
+      "hump/0.4-2"
+   }
+}
+repository = {
+   bump = {
+      ["3.1.7-1"] = {
+         {
+            arch = "installed",
+            commands = {},
+            dependencies = {},
+            modules = {
+               bump = "bump.lua"
+            }
+         }
+      }
+   },
+   fennel = {
+      ["0.2.1-2"] = {
+         {
+            arch = "installed",
+            commands = {
+               fennel = "fennel"
+            },
+            dependencies = {},
+            modules = {
+               fennel = "fennel.lua",
+               fennelview = "fennelview.lua"
+            }
+         }
+      }
+   },
+   fun = {
+      ["0.1.3-1"] = {
+         {
+            arch = "installed",
+            commands = {},
+            dependencies = {},
+            modules = {
+               fun = "fun.lua"
+            }
+         }
+      }
+   },
+   hump = {
+      ["0.4-2"] = {
+         {
+            arch = "installed",
+            commands = {},
+            dependencies = {},
+            modules = {
+               ["hump.camera"] = "hump/camera.lua",
+               ["hump.class"] = "hump/class.lua",
+               ["hump.gamestate"] = "hump/gamestate.lua",
+               ["hump.signal"] = "hump/signal.lua",
+               ["hump.timer"] = "hump/timer.lua",
+               ["hump.vector"] = "hump/vector.lua",
+               ["hump.vector-light"] = "hump/vector-light.lua"
+            }
+         }
+      }
+   }
+}

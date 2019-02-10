@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec '/usr/bin/lua5.1' -e 'package.path="rocks/share/lua/5.1/?.lua;rocks/share/lua/5.1/?/init.lua;"..package.path; package.cpath="rocks/lib/lua/5.1/?.so;"..package.cpath' -e 'local k,l,_=pcall(require,"luarocks.loader") _=k and l.add_context("fennel","0.2.1-2")' '/home/eric/src/sideways/rocks/lib/luarocks/rocks-5.1/fennel/0.2.1-2/bin/fennel' "$@"

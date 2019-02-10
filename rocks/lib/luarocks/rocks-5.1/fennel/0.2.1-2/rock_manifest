@@ -1,0 +1,20 @@
+rock_manifest = {
+   bin = {
+      fennel = "c7ff77c00446ce9c1d7aa68696121691"
+   },
+   doc = {
+      ["CONTRIBUTING.md"] = "50d6fb82b4d5284f7dccec723045ec3e",
+      LICENSE = "b12d21522cf490daa2dab6bd44aa14a3",
+      ["README.md"] = "179b6d0d9c2338ee89b5b01d71bc7e32",
+      ["api.md"] = "43213b3b85145347a81fde4e2f229a75",
+      ["changelog.md"] = "6bc49ab92d79927a3b159b1a78869d21",
+      ["lua-primer.md"] = "b2cbc156f7378a1b77a5131ba7805336",
+      ["reference.md"] = "5c026556968d205c12a3140ddcdda7ec",
+      ["tutorial.md"] = "3e5782edd73f69bd231dfd175a9cb959"
+   },
+   ["fennel-0.2.1-2.rockspec"] = "26028ba399f18bc581618883ea75ff17",
+   lua = {
+      ["fennel.lua"] = "e5940414ba52adde5d79dd45920a12cc",
+      ["fennelview.lua"] = "191153dc0761ef8b1d6d3003aa5605ec"
+   }
+}
