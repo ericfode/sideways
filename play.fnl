@@ -46,7 +46,6 @@
 {:draw (partial draw.draw cam world state)
 
  :update (fn update [dt set-mode]
-
            (each [key update (pairs keymap)]
              (when (love.keyboard.isDown key)
                (update)))
