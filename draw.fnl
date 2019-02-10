@@ -10,19 +10,23 @@
     (love.graphics.line (unpack segment))))
 
 (fn draw-npc [name state]
-  (love.graphics.rectangle "line" state.x state.y 10 10))
+  (love.graphics.circle "line" state.x state.y state.r))
 
 (fn draw-npcs [state]
   (each [name st (pairs state.npcs)]
     (draw-npc name st)))
 
+(fn draw-player [state]
+  (love.graphics.push)
+  ;; drawing non-map stuff needs to apply our own translate
+  (love.graphics.setColor 1 1 1)
+  (love.graphics.circle "fill"   state.player.x state.player.y state.player.r)
+  (love.graphics.pop))
+
 {:draw (fn draw [camera world state]
          (: camera :attach)
-         (love.graphics.push)
-         (love.graphics.setColor 1 1 1)
-         (love.graphics.circle "line"   state.player.x state.player.y 10)
-         (love.graphics.pop)
-         (draw-npcs state)
+         (draw-player state)
+        (draw-npcs state)
          (: camera :detach)
         ; (hud.draw state)
          )

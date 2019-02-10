@@ -5,9 +5,16 @@
 
 (local world (bump.newWorld))
 
-(local state {:npcs {:george {:x 96 :y 120}}
+(local state {:npcs {:george
+                     {:x 96 :y 120
+                      :r 10
+                      :w 20 :h 20}}
               :messages ["test message"]
-              :player {:x 100 :y 100}
+              :player {:x 100
+                       :r 10
+                       :w 20
+                       :h 20
+                       :y 100}
               :tx 0
               :ty 0})
 
@@ -31,14 +38,53 @@
       (let [{:r r :v v :name name} s]
         (tset state.npcs name
               {:x (+ center-x (* r (math.cos v)))
-               :y (+ center-y (* r (math.sin v)))})))))
+               :y (+ center-y (* r (math.sin v)))
+               :r 10
+               :w 20
+               :h 20})))))
 
-(circle-of-npcs)
+(fn add-entity [world entity]
+  (: world :add entity entity.x entity.y entity.w entity.h))
 
-(local keymap {"a" (fn [] (set state.player.x (- state.player.x 1)))
-               "s" (fn [] (set state.player.y (+ state.player.y 1)))
-               "w" (fn [] (set state.player.y (- state.player.y 1)))
-               "d" (fn [] (set state.player.x (+ state.player.x 1)))})
+(fn init-physics [world state]
+  (fun.each (partial add-entity world) state.npcs)
+  (add-entity world state.player))
+
+(fn init []
+  (circle-of-npcs)
+  (init-physics world state))
+
+(init)
+(local keymap {"a" (fn []
+                     (set state.player.goal-x (- state.player.x 1))
+                     (set state.player.goal-y state.player.y))
+               "s" (fn [] (set state.player.goal-y (+ state.player.y 1))
+                     (set state.player.goal-x state.player.x))
+               "w" (fn [] (set state.player.goal-y (- state.player.y 1))
+                     (set state.player.goal-x state.player.x))
+               "d" (fn [] (set state.player.goal-x (+ state.player.x 1))
+                     (set state.player.goal-y state.player.y))})
+
+(fn update-entity [world entity]
+  (let  [(actualX actualY cols len)
+         (: world :move entity entity.goal-x entity.goal-y)]
+    (print len)
+    (set entity.x actualX)
+    (set entity.y actualY)
+    (set entity.goal-x nil)
+    (set entity.goal-y nil)
+    (set state.cols (+ state.cols len))))
+
+(fn filter-entity [entity]
+  (and entity.goal-x entity.goal-y))
+
+(fn update-physics [world state]
+  (set state.cols 0)
+  (let [has-goal (fun.filter filter-entity state.npcs)
+        updated  (fun.each (partial update-entity world) has-goal)]
+
+    (when (filter-entity state.player)
+      (update-entity world state.player))))
 
 (love.keyboard.setKeyRepeat true)
 
@@ -49,6 +95,7 @@
            (each [key update (pairs keymap)]
              (when (love.keyboard.isDown key)
                (update)))
+           (update-physics world state)
            (: cam :lockWindow state.player.x state.player.y 0 400 0 300 )
            )
  :keypressed (fn keypressed [key]
